@@ -1,0 +1,56 @@
+README
+
+Part 2. Coding Problem
+
+An Overview of AI
+The AI predicts by considering two factors: 1) where the projectile will fall on the ground, and 2) where the current explosions are. 
+To predict the projectile, I used equations of motion in general physics:  
+y = y_0 + vy * time + 1/2 * gravity * times^2
+Using a quadractic equation, you can calculate the time when y = 0.
+
+temp_t = (-b + sqrt(pow(b,2)-4*a*c))/(2*a); 
+
+Finally, using the equation of motion again, I can find where my predicted x position of the projectile will be located at.
+
+x = x_0 + vx * predicted_time 
+
+This position is considered as a reference point for the predicted dangerous zone. Iterating all the projectile to find the predicted x location, and then considering the explosion range let me know which x points will be dangerous. 
+
+With a similar logic, iterating all the explosions to find the current explosion x location. Again, explosion range to such explosion x point is considered.
+
+The AI player will choose the spot, where the projectile will not land in the future, and where there are no current explosions.
+
+Challenges I faced in implementing the AI
+I faced some challenges throughout implementing the AI. First, I was confused with the game time and actual time calculated in the equations of motion. Understanding how each time defined in the program is different took me some effort. 
+
+Then, I had trouble creating an array of dangerousSafeZone[] by dynamically allocating the memory. Because I used a constructor, I had to free this memory later to prevent memory leaks. Initially, I tried using heap in determinSafeSpots() function, then freeing the memory at the end of control()$function. This seemed weird because constructor and deleter are in different functions. In a way, this could increase the possibility of forgetting where the deleter is in the future. 
+Also, my AI showed the tendency of either moving right or left without stopping. In the pickSafeSpot()function, the AI was either designed to move left or right toward where safe spots would be. The problem was that the AI was continuously moving even when its current position is safe. Therefore, if a conditional statement to move the player to the left is written before the conditional statement to move the player to the right, the AI ended up being positioned at the left part of the game.  
+
+
+        //An example of the AI player skewing to the left
+        int l = p->x;
+        int r = p->x;
+        
+        while (l > 0 || r < w) {
+            std::cout <<r << " " << l << std::endl;
+            if (l > 0 && dangerZonePred[l] == 0){
+                std::cout << "left " << l << " " << r << std::endl;
+                return -1;
+            }
+            if (r < w && dangerZonePred[r] == 0){
+                std::cout << "right "<<r << " " << l << std::endl;
+                return 1;
+            }
+            r++;
+            l--;
+        }
+
+AI performance on a Hard scenario
+The AI program, however, does not consider how much time will it take for the projectile to land on the predicted ground. This is probably the reason why the program does not work well on the Hard scenario, which has more enemies and more projectiles shoot. The AI player wouldn't last more than 2 seconds with the current program on the Hard scenario. 
+
+To overcome this, I may have to consider changing $dangerSafeZone[]$ as an array of the time left until the explosion. Then for each projectile, I can calculate the time remaining until the projectile reaches to the land. By doing so, I will be able to know which safe spots will last longer and which will not.
+
+My opinion on the assignment and my goals
+The goal of the assignment states that it intends "to give you practical experience in writing and debugging actual C++ applications and give you more practice at memory in C++."
+
+I think this was a great assignment to get familiarized with C++ programming and learn about the memory structure in C++. From this assignment, I learned about std::iterator, pointer, class in general, and the difference between public and private classes. I hope the assignment gives some questions about dynamic memory allocation and freeing the memory after its use to prevent memory leakage.
