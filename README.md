@@ -1,6 +1,6 @@
 # programmingfamiliarization
 
-A simple implementation of AI missile avoiding bot using C++. <br>
+A simple C++ implementation on AI missile avoiding bot.
 
 
 
