@@ -1,0 +1,7 @@
+set(message_ui_SETUP_PY_SETUP_MODULE "distutils.core")
+set(message_ui_SETUP_PY_VERSION "0.0.0")
+set(message_ui_SETUP_PY_SCRIPTS "")
+set(message_ui_SETUP_PY_PACKAGES "message_ui")
+set(message_ui_SETUP_PY_PACKAGE_DIRS "src/message_ui")
+set(message_ui_SETUP_PY_MODULES "")
+set(message_ui_SETUP_PY_MODULE_DIRS "")
