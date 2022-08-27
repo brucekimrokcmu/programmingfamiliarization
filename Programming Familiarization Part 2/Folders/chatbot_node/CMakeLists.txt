@@ -31,5 +31,5 @@ include_directories(
 add_executable(chatbot_node src/chatbot_node.cpp)
 add_dependencies(chatbot_node ${catkin_EXPORTED_TARGETS})
 add_dependencies(chatbot_node message_ui_generate_messages_cpp)
-add_dependencies(chatbot_node chatbot_node_generate_messages_cpp)
+# add_dependencies(chatbot_node chatbot_node_generate_messages_cpp)
 target_link_libraries(chatbot_node ${catkin_LIBRARIES} )

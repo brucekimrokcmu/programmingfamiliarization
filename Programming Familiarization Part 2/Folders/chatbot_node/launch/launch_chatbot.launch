@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <launch>
 
-  <node name="chatbot_node" pkg="chatbot_node" type="chatbot_node">
+  <node name="chatbot_node" pkg="chatbot_node" type="chatbot_node" output="screen">
   </node>
 
-  <!--node name="counter_node" pkg="counter_node" type="counter_node">
-  </node-->
+  <param name="/user_name" type="string" value="Bruce" />
 
-  <!--node name="arithmetic_node" pkg="arithmetic_node" type="arithmetic_node">
-  </node-->
+  <node name="counter_node" pkg="counter_node" type="counter_node" output="screen">
+  </node>
+
+  <node name="arithmetic_node" pkg="arithmetic_node" type="arithmetic_node" output="screen">
+  </node>
 
 </launch>
